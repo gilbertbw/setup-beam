@@ -292,9 +292,9 @@ async function getOTPVersions(osVersion) {
       otpVersionsListing
         .map((x) => x.assets)
         .flat()
-        .filter((x) => x.name.match(/^otp_win64_.*.exe$/))
+        .filter((x) => x.name.match(/^otp_win32_.*.exe$/))
         .forEach((x) => {
-          const otpMatch = x.name.match(/^otp_win64_(.*).exe$/)
+          const otpMatch = x.name.match(/^otp_win32_(.*).exe$/)
           const otpVersion = otpMatch[1]
           debugLog('OTP line and parsing', [otpMatch, otpVersion])
           otpVersions[otpVersion] = otpVersion
@@ -799,7 +799,7 @@ async function install(toolName, opts) {
         win32: {
           downloadToolURL: () =>
             'https://github.com/erlang/otp/releases/download/' +
-            `OTP-${toolVersion}/otp_win64_${toolVersion}.exe`,
+            `OTP-${toolVersion}/otp_win32_${toolVersion}.exe`,
           extract: async () => ['file', 'otp.exe'],
           postExtract: async (cachePath) => {
             const cmd = path.join(cachePath, 'otp.exe')
